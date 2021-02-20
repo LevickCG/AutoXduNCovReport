@@ -2,8 +2,10 @@ name: Auto NCov Report
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '0 0 * * *'
+  push:
+    schedule:
+      - cron: '0 0,4,12 * * *'
+      # CST=UTC+8:00, so the schedule will run at minute 0 past hour 8, 12, 20 everyday
 
 jobs:
   build:
@@ -21,4 +23,5 @@ jobs:
     - name: Run and send notification
       run: |
         cd AutoXduNCovReport
-        dotnet run -- -u ${{ secrets.USERNAME }} -p ${{ secrets.PASSWORD }} -k ${{ secrets.SCKEY }}
+        dotnet run -- -u ${{ secrets.USERNAME }} -p ${{ secrets.PASSWORD }}
+# -k ${{ secrets.SCKEY }}  We don't use ServerChan here
