@@ -12,4 +12,9 @@ namespace AutoXduNCovReport.Model
         [property: JsonPropertyName("d")] T Data,
         [property: JsonPropertyName("m")] string Message
     );
+
+    record TCheckData(
+        [property: JsonPropertyName("ontime")] bool OnTime,
+        [property: JsonPropertyName("realonly")] bool Readonly
+    );
 }

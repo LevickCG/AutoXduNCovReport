@@ -4,8 +4,10 @@ on:
   workflow_dispatch:
   push:
   schedule:
-    - cron: '0 0,4,12 * * *'
+
+    - cron: '0 0,1,4,5,10,11 * * *'
     # CST=UTC+8:00, so the schedule will run at minute 0 past hour 8, 12, 20 everyday
+
 
 jobs:
   build:
@@ -23,5 +25,4 @@ jobs:
     - name: Run and send notification
       run: |
         cd AutoXduNCovReport
-        dotnet run -- -u ${{ secrets.USERNAME }} -p ${{ secrets.PASSWORD }}
-# -k ${{ secrets.SCKEY }}  We don't use ServerChan here
+        dotnet run -- ${{ secrets.FUNCTION }} -u ${{ secrets.USERNAME }} -p "${{ secrets.PASSWORD }}" -c ${{ secrets.CAMPUS }} 
